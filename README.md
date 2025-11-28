@@ -29,8 +29,7 @@ The project leverages the Google ADK (Agent Development Kit).
 
 2. Set up the Python environment using `uv`:
    ```bash
-   uv create
-   uv install
+   uv sync
    ```
 
 3. Configure environment variables:
