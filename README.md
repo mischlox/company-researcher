@@ -9,6 +9,7 @@ The project leverages the Google ADK (Agent Development Kit).
 - [ ] Improve UI
 - [ ] Add guardrails, so only searches for companies are allowed
 - [ ] Make the LLM ask further questions if anything is still unclear
+- [ ] Deploy demo to huggingface
 
 ## Features
 
