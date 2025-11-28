@@ -6,6 +6,7 @@ from google.genai import types
 from planner_agent import planner_agent, SearchPlan
 from search_agent import search_agent
 from report_agent import report_agent, ReportData
+from questions_agent import questions_agent
 import uuid
 
 
@@ -45,8 +46,8 @@ class CompanyResearcher:
         # yield "Report written, formatting PDF ..."
         # await self.create_pdf(report)
         # # TODO: Show preview of PDF and download it.
-        print(report.markdown_report)
-        yield report.markdown_report
+        print(report)
+        yield report
         
     async def plan_searches(self, query: str) -> SearchPlan:
         return await self.run_query(planner_agent, query)
@@ -63,8 +64,25 @@ class CompanyResearcher:
     
     async def write_report(self, original_query, search_results: list[str]) -> ReportData:
         input = f"Original query: {original_query} search results: {search_results}"
-        return await self.run_query(report_agent, input)
+        report_task = asyncio.create_task(
+            self.run_query(report_agent, input)
+        )
+        questions_task = asyncio.create_task(
+            self.run_query(questions_agent, input)
+        )
+        report_result, questions_result = await asyncio.gather(
+            report_task,
+            questions_task
+        )
         
+        combined_markdown = (
+            report_result.markdown_report
+            + "\n\n---\n\n"
+            + "## Interview Questions\n\n"
+            + questions_result.markdown_questions           
+        )
+        return combined_markdown
+
         
     async def create_pdf(self, report: ReportData) -> None:
         pass
