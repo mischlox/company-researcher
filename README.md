@@ -44,7 +44,7 @@ The project leverages the Google ADK (Agent Development Kit).
 
 1. Launch the application:
    ```bash
-   python company-researcher/main.py
+   uv run company-researcher/main.py 
    ```
 
 2. Open the Gradio interface in your browser and enter a topic to research.
