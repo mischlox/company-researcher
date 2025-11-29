@@ -3,6 +3,7 @@ import asyncio
 from google.adk.runners import Runner
 from google.adk.sessions.in_memory_session_service import InMemorySessionService
 from google.genai import types
+from query_checker_agent import query_checker_agent, InputValidation
 from planner_agent import planner_agent, SearchPlan
 from search_agent import search_agent
 from report_agent import report_agent, ReportData
@@ -13,7 +14,7 @@ import uuid
 
 class CompanyResearcher:
     
-    def __init__(self, app_name="Company Research Agent", user_id="research_tool_user"):
+    def __init__(self, app_name="CompanyResearchAgent", user_id="research_tool_user"):
         self.app_name = app_name
         self.user_id = user_id
         self.session_service = InMemorySessionService()
@@ -38,6 +39,11 @@ class CompanyResearcher:
     async def run(self, query: str):
         """Run the deep research process, yielding the status updates and the final report"""
         print("Starting research ...")
+        input_validation = await self.check_query(query)
+        if not input_validation.valid:
+            yield input_validation.reason
+            return
+        
         search_plan = await self.plan_searches(query)
         yield "Searches planned, starting to search ..."
         search_results = await self.perform_searches(search_plan)
@@ -49,6 +55,9 @@ class CompanyResearcher:
         print(report)
         yield report
         
+    async def check_query(self, query: str) -> InputValidation:
+        return await self.run_query(query_checker_agent, query)
+    
     async def plan_searches(self, query: str) -> SearchPlan:
         return await self.run_query(planner_agent, query)
 
