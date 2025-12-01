@@ -37,24 +37,24 @@ class CompanyResearcher:
         return final_response
     
     async def run(self, query: str):
-        """Run the deep research process, yielding the status updates and the final report"""
-        print("Starting research ...")
-        input_validation = await self.check_query(query)
-        if not input_validation.valid:
-            yield input_validation.reason
-            return
-        
-        search_plan = await self.plan_searches(query)
-        yield "Searches planned, starting to search ..."
-        search_results = await self.perform_searches(search_plan)
-        yield "Searches completed, writing report ..."
-        report = await self.write_report(query, search_results)
-        # yield "Report written, formatting PDF ..."
-        # await self.create_pdf(report)
-        # # TODO: Show preview of PDF and download it.
-        print(report)
-        yield report
-        
+        try:
+            print("Starting research ...")
+            input_validation = await self.check_query(query)
+            if not input_validation.valid:
+                yield input_validation.reason
+                return
+            
+            search_plan = await self.plan_searches(query)
+            yield "Searches planned, starting to search ..."
+            search_results = await self.perform_searches(search_plan)
+            yield "Searches completed, writing report ..."
+            report = await self.write_report(query, search_results)
+            print(report)
+            yield report
+        except Exception as e:
+            print(f"Error during run(): {e}")
+            yield "An error occurred while processing your query. Please try again."
+
     async def check_query(self, query: str) -> InputValidation:
         return await self.run_query(query_checker_agent, query)
     

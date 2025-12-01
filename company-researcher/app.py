@@ -18,8 +18,9 @@ def main():
             title="Company Research Agent",
             examples=["Google Inc.", "Tell me about Apple", "Bosch Schwäbisch Gmünd"],
             show_progress="full",
+            cache_examples=False
             )
-    ui.launch(inbrowser=True)
+    ui.launch()
 
 
 if __name__ == "__main__":
