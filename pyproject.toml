@@ -8,6 +8,7 @@ dependencies = [
     "dotenv>=0.9.9",
     "google-adk>=1.19.0",
     "gradio>=5.23.1",
+    "huggingface-hub>=1.1.5",
     "mlflow>=3.6.0",
     "pydantic>=2.12.5",
 ]

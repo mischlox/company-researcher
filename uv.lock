@@ -321,6 +321,7 @@ dependencies = [
     { name = "dotenv" },
     { name = "google-adk" },
     { name = "gradio" },
+    { name = "huggingface-hub" },
     { name = "mlflow" },
     { name = "pydantic" },
 ]
@@ -330,6 +331,7 @@ requires-dist = [
     { name = "dotenv", specifier = ">=0.9.9" },
     { name = "google-adk", specifier = ">=1.19.0" },
     { name = "gradio", specifier = ">=5.23.1" },
+    { name = "huggingface-hub", specifier = ">=1.1.5" },
     { name = "mlflow", specifier = ">=3.6.0" },
     { name = "pydantic", specifier = ">=2.12.5" },
 ]
