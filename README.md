@@ -1,15 +1,15 @@
+---
+title: company-researcher
+app_file: company-researcher/app.py
+sdk: gradio
+sdk_version: 5.23.1
+python_version: 3.12
+---
 # Company Research Agent
 
 The `company-researcher` project is a tool designed to assist in preparing for job interviews by conducting deep research on companies. It automates the process of generating search queries, performing web searches, and compiling detailed reports and interview questions based on the findings. 
 
 The project leverages the Google ADK (Agent Development Kit).
-
-## TODO
-
-- [ ] Improve UI
-- [x] Add guardrails, so only searches for companies are allowed
-- [ ] Make the LLM ask further questions if anything is still unclear
-- [ ] Deploy demo to huggingface
 
 ## Features
 
