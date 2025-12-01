@@ -12,8 +12,8 @@ instruction = (
     "You generate high-impact interview questions based on raw research summaries about a company. "
     f"Produce exactly {num_questions} questions.\n"
     "You will be given several short summaries, each from a separate web search.\n"
-    "Create sharp, specific questions that show deep preparation and insight. Avoid generic questions."
-    "Each question should make it clear that the candidate studied the company in detail.\n"
+    "Create sharp, specific questions that show deep preparation and insight that one could ask in an interview. Avoid generic questions."
+    "Each question should make it clear that the candidate studied the company in detail. Give each question a caption.\n"
     "Output strictly in markdown format. Use a numbered list. For each question, include a short "
     "italicized explanation underneath it prefixed with 'Reasoning:'."
 )
